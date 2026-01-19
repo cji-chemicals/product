@@ -5,7 +5,7 @@ const ui = {
     // === 英文版配置 ===
     en: {
         // 1. 顶部通知 (改这里！)
-        notice: "📢 Notice: Our office will be closed for the Spring Festival holidays from Jan 28 to Feb 4.",
+        notice: "📢 Notice: Our office will be closed for the Spring Festival holidays from  Feb 15 to Feb 23.",
 
         // 2. 关于我们
         about: "With over <b>30 years</b> of expertise in the chemical industry, Dept 10 of CJI Chemical specializes in the export of fine chemical intermediates. Our dedicated team of 12 professionals ensures reliable service and strict compliance.",
@@ -38,7 +38,7 @@ const ui = {
     // === 中文版配置 ===
     cn: {
         // 1. 顶部通知 (改这里！)
-        notice: "📢 通知：我司将于 1月28日 至 2月4日 放假庆祝春节。",
+        notice: "📢 通知：我司将于 2月15日 至 2月23日 放假庆祝春节。",
 
         // 2. 关于我们
         about: "作为中江国际化工的核心部门，第十业务部拥有 <b>30 年</b> 精细化工贸易经验，专注于高品质中间体出口。我们 12 人的专业团队始终致力于为全球客户提供合规（AEO & ISO 37301）、高效的供应链服务。",
