@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CJI Chemical Product List</title>
-    <link rel="icon" href="logo2.png" type="image/png">
+    <!-- 网页标题 -->
+    <title>CJI Chemical Product Catalog</title>
+    <link rel="icon" href="logo.png" type="image/png">
     <style>
         /* --- 基础样式 --- */
         :root {
@@ -18,20 +19,18 @@
         
         /* 通知栏 */
         .notice-bar { background-color: #fff3cd; color: #856404; text-align: center; padding: 8px 20px; font-size: 13px; border-bottom: 1px solid #ffeeba; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .notice-icon { font-size: 16px; }
 
         /* 导航栏 */
         header { background: #fff; border-bottom: 3px solid var(--primary); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-inner { max-width: 1400px; margin: 0 auto; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-logo { font-size: 32px; color: var(--primary); } 
-        .brand-text h1 { font-size: 20px; margin: 0; color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .brand-text h2 { font-size: 12px; margin: 0; color: #666; font-weight: 600; background: #eee; display: inline-block; padding: 2px 8px; border-radius: 4px; margin-top: 4px; }
+        /* Logo稍微放大了一点 */
+        .brand-logo { height: 45px; width: auto; } 
+        .brand-text h1 { font-size: 22px; margin: 0; color: var(--primary); font-weight: 800; letter-spacing: 0.5px; }
 
         .lang-control-area { display: flex; align-items: center; gap: 15px; }
         .manual-lang-btn { border: 1px solid var(--primary); color: var(--primary); background: white; padding: 5px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; white-space: nowrap; }
-        .manual-lang-btn:hover { background: #eef2f7; }
-
+        
         /* 谷歌翻译 */
         #google_translate_element { min-width: 120px; display: block; }
         .goog-te-banner-frame { display: none !important; }
@@ -39,13 +38,36 @@
         .goog-tooltip { display: none !important; }
         .goog-te-gadget-simple { background-color: white !important; border: 1px solid #ccc !important; padding: 4px !important; border-radius: 4px !important; }
 
-        /* 关于我们 */
-        .about-section { background: white; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; }
-        .about-inner { max-width: 800px; margin: 0 auto; }
-        .about-desc { font-size: 15px; line-height: 1.6; color: #555; margin-bottom: 20px; }
-        .badges { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .badge { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 5px; box-shadow: 0 2px 5px rgba(0,30,80,0.2); }
-        .badge span { color: var(--secondary); font-size: 14px; } 
+        /* --- 核心展示区 (证书 + Slogan) --- */
+        .showcase-section {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .slogan {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+        /* 证书图片容器 */
+        .cert-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .cert-img {
+            height: 180px; /* 控制证书高度，根据您图片实际情况调整 */
+            width: auto;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            cursor: pointer; /* 鼠标放上去变手指 */
+        }
+        .cert-img:hover { transform: scale(1.05); } /* 鼠标悬停放大 */
 
         /* 搜索与列表 */
         .toolbar { background: #e9ecef; padding: 20px; text-align: center; }
@@ -94,19 +116,17 @@
 
         /* Footer */
         footer { background: #222; color: #bbb; padding: 50px 20px; font-size: 13px; margin-top: 60px; }
-        .footer-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .footer-col h3 { color: white; font-size: 16px; margin-bottom: 15px; border-left: 3px solid var(--secondary); padding-left: 10px; }
-        .footer-info p { margin: 8px 0; line-height: 1.5; }
+        .footer-inner { max-width: 1000px; margin: 0 auto; text-align: center; } /* 底部居中 */
+        .footer-info { margin-bottom: 20px; line-height: 1.8; font-size: 14px; }
         .footer-info a { color: #bbb; text-decoration: none; border-bottom: 1px dotted #666; transition: 0.2s; }
         .footer-info a:hover { color: var(--secondary); border-bottom-color: var(--secondary); }
-        .copyright { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 12px; }
+        .copyright { padding-top: 20px; border-top: 1px solid #333; color: #666; font-size: 12px; }
 
         @media (max-width: 768px) {
             .product-grid { grid-template-columns: 1fr; } 
             .nav-inner { flex-direction: column; gap: 15px; align-items: flex-start; }
             .lang-control-area { width: 100%; justify-content: space-between; }
-            .footer-inner { grid-template-columns: 1fr; }
-            .notice-bar { font-size: 12px; }
+            .cert-img { height: 120px; } /* 手机端证书图片缩小 */
         }
     </style>
 </head>
@@ -120,11 +140,10 @@
 <header>
     <div class="nav-inner">
         <div class="brand">
-            <!-- 这里改成了读取图片，高度设为40像素，保持清晰 -->
-<img src="logo.png" class="brand-logo" style="height: 40px; width: auto;" alt="CJI Logo">
+            <!-- Logo图片 -->
+            <img src="logo.png" class="brand-logo" alt="CJI Logo">
             <div class="brand-text">
                 <h1 id="lbl-company">CJI Chemical</h1>
-                <h2 id="lbl-dept" style="display: none;">Dept 10 (Fine Chemicals Division)</h2>
             </div>
         </div>
         
@@ -135,14 +154,16 @@
     </div>
 </header>
 
-<div class="about-section">
-    <div class="about-inner">
-        <div class="about-desc" id="aboutText">Loading info...</div>
-        <div class="badges">
-            <div class="badge"><span>✓</span> AEO Certified</div>
-            <div class="badge"><span>✓</span> ISO 37301</div>
-            <div class="badge"><span>✓</span> Global Supplier</div>
-        </div>
+<!-- 核心展示区：Slogan + 证书图片 -->
+<div class="showcase-section">
+    <div class="slogan" id="lbl-slogan">
+        Loading...
+    </div>
+    <!-- 证书图片位置 -->
+    <div class="cert-container">
+        <!-- 请确保您文件夹里有 cert1.jpg 和 cert2.jpg -->
+        <img src="cert1.jpg" class="cert-img" alt="Certificate 1" onclick="window.open(this.src)">
+        <img src="cert2.jpg" class="cert-img" alt="Certificate 2" onclick="window.open(this.src)">
     </div>
 </div>
 
@@ -167,7 +188,7 @@
     
     <a href="https://wa.me/8615295570878" target="_blank" class="social-btn btn-wa" title="WhatsApp">💬</a>
     
-    <a href="#" class="social-btn btn-wechat" title="WeChat ID: darinsun820" onclick="alert('WeChat ID: darinsun820\nPlease add me manually.')">
+    <a href="#" class="social-btn btn-wechat" title="WeChat ID: cjichem" onclick="alert('WeChat ID: cjichem\nPlease add me manually.')">
         <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M14,0 C6.268,0 0,5.168 0,11.541 C0,15.141 2.379,18.358 6.035,20.352 C6.268,20.48 6.375,20.762 6.273,21.016 L5.453,23.336 C5.344,23.645 5.66,23.938 5.941,23.777 L9.395,21.801 C9.57,21.703 9.777,21.676 9.973,21.727 C11.266,22.051 12.613,22.223 14,22.223 C21.73,22.223 28,17.055 28,10.684 C28,4.313 21.73,0 14,0 Z M9.5,9 C8.672,9 8,8.328 8,7.5 C8,6.672 8.672,6 9.5,6 C10.328,6 11,6.672 11,7.5 C11,8.328 10.328,9 9.5,9 Z M18.5,9 C17.672,9 17,8.328 17,7.5 C17,6.672 17.672,6 18.5,6 C19.328,6 20,6.672 20,7.5 C20,8.328 19.328,9 18.5,9 Z"/></svg>
     </a>
     
@@ -179,25 +200,14 @@
 
 <footer>
     <div class="footer-inner">
-        <div class="footer-col">
+        <div class="footer-info">
             <h3 id="lbl-contact">Contact Us</h3>
-            <div class="footer-info">
-                <p><b>Tel:</b> +86-25-83273961</p>
-                <p><b>Mob:</b> +86-15295570878</p>
-                <p><b>Email:</b> <a href="mailto:darinsun820@gmail.com;bensun@cjigroup.com.cn">darinsun820@gmail.com;bensun@cjigroup.com.cn</a></p>
-                <p><b>Add:</b> 9F, No.199-1, Guoji Road, Qinhuai District, Nanjing, China</p>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h3 id="lbl-cert">Certifications</h3>
-            <div class="footer-info">
-                <p>✅ AEO Advanced Certified Enterprise</p>
-                <p>✅ ISO 37301 Compliance Management</p>
-                <p>✅ ISO 9001 Quality Management</p>
-            </div>
+            <p><b>Tel:</b> +86-25-83273961 &nbsp;|&nbsp; <b>Mob:</b> +86-15295570878</p>
+            <p><b>Email:</b> <a href="mailto:sales@cji-chem.com">sales@cji-chem.com</a></p>
+            <p><b>Add:</b> 9F, No.199-1, Guoji Road, Qinhuai District, Nanjing, China</p>
         </div>
     </div>
-    <div class="copyright">© 2026 China Jiangsu International Chemical Co., Ltd - Dept 10</div>
+    <div class="copyright">© 2026 China Jiangsu International Chemical Co., Ltd</div>
 </footer>
 
 <script type="text/javascript">
@@ -207,13 +217,12 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- 核心：引入两个外部JS文件 -->
+<!-- 引入数据和配置 -->
 <script src="data.js"></script>
 <script src="config.js"></script>
 
 <script>
-    // --- 核心逻辑 ---
-    // 检查外部文件是否加载
+    // 检查外部文件
     if (typeof productData === 'undefined' || typeof ui === 'undefined') {
         alert("Error: Missing config.js or data.js file.");
     }
@@ -235,22 +244,17 @@ function googleTranslateElementInit() {
         applyFilters(); 
     }
 
-    // 从 config.js 读取文字并更新界面
     function updateUIText() {
         const t = ui[currentLang];
-        
         document.getElementById('lbl-company').innerText = t.company;
-        document.getElementById('lbl-dept').innerText = t.dept;
         document.querySelector('.manual-lang-btn').innerText = currentLang === 'en' ? '🇨🇳 中文 / EN' : '🇺🇸 EN / 中文';
         document.getElementById('searchInput').placeholder = t.searchPlaceholder;
         document.getElementById('cartText').innerText = t.cartText;
         document.getElementById('sortInfo').innerText = t.sortInfo;
         
-        // 更新关于我们、通知、底部
-        document.getElementById('aboutText').innerHTML = t.about;
+        document.getElementById('lbl-slogan').innerText = t.slogan; // 新增 Slogan
         document.getElementById('noticeText').innerText = t.notice;
         document.getElementById('lbl-contact').innerText = t.contactTitle;
-        document.getElementById('lbl-cert').innerText = t.certTitle;
 
         document.querySelectorAll('.btn-add').forEach(btn => {
             const added = btn.parentElement.parentElement.classList.contains('selected');
@@ -262,7 +266,6 @@ function googleTranslateElementInit() {
         const container = document.getElementById('filters');
         container.innerHTML = '';
         const cats = ui[currentLang].cats;
-        // 保持固定顺序
         const keys = ["All", "Pharma", "Solvents", "Agro", "Fragrance", "Dyes", "Additives"];
         keys.forEach(key => {
             if(cats[key]) {
@@ -345,7 +348,7 @@ function googleTranslateElementInit() {
             body += `${index + 1}. ${name} (CAS: ${p.cas})\n`;
         });
         body += "\n--------------------------\n";
-        window.location.href = `mailto:darinsun820@gmail.com?subject=${encodeURIComponent(t.inquirySubject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:sales@cji-chem.com?subject=${encodeURIComponent(t.inquirySubject)}&body=${encodeURIComponent(body)}`;
     }
 
     window.filterData = function(key, btn) {
@@ -365,8 +368,6 @@ function googleTranslateElementInit() {
     };
 
     searchInput.addEventListener('input', applyFilters);
-    
-    // 初始化
     updateUIText();
     renderFilterButtons();
     render(db);
