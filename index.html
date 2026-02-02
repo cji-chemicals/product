@@ -27,7 +27,23 @@
             --text: #333;
             --card-bg: #fff;
         }
-        body { font-family: 'Segoe UI', 'Helvetica Neue', 'Microsoft YaHei', sans-serif; background: var(--bg); margin: 0; color: var(--text); padding-bottom: 100px; }
+        /* 修改后的样子 (增加了 animation 属性) */
+        body { 
+    font-family: 'Segoe UI', 'Helvetica Neue', 'Microsoft YaHei', sans-serif; 
+    background: var(--bg); 
+    margin: 0; 
+    color: var(--text); 
+    padding-bottom: 100px;
+    
+    /* 这里是核心：让网页加载时淡入 0.8秒 */
+    animation: fadeIn 0.8s ease-in-out; 
+}
+
+/* 定义淡入动画的原理 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); } /* 从透明且稍微靠下一点开始 */
+    to { opacity: 1; transform: translateY(0); }      /* 变成不透明且回到原位 */
+}
         
         /* 1. 通知栏 (保持黄色醒目) */
         .notice-bar { background-color: #fff8e1; color: #856404; text-align: center; padding: 6px 20px; font-size: 12px; border-bottom: 1px solid #ffeeba; display: flex; justify-content: center; align-items: center; gap: 10px; }
