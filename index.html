@@ -3,100 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 1. 网页标题 (去掉了部门，更官方) -->
+    <!-- 网页标题 -->
     <title>CJI Chemical - Global Product Catalog</title>
+    <!-- 浏览器标签页图标 -->
     <link rel="icon" href="logo2.png" type="image/png">
 
-    <!-- 2. 社交媒体分享卡片 (OG Tags) - 这就是让分享链接变帅的关键！ -->
+    <!-- 社交媒体分享卡片设置 (发送给微信朋友时显示的图片和文字) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="CJI Chemical | Global Fine Chemical Supplier">
     <meta property="og:description" content="AEO & ISO Certified. 30+ Years Experience. Search our digital catalog for high-quality Intermediates & Solvents.">
-    <!-- ⚠️注意：下面这个链接必须换成你真正的网址链接 + /logo.png -->
-    <!-- 比如：https://cji-chemical.github.io/logo.png -->
-    <meta property="og:image" content="https://https://cji-chemicals.github.io/product/logo2.png"> 
-    <meta property="og:url" content="https://https://cji-chemicals.github.io/product/">
+    <!-- ⚠️ 如果买了域名，记得把下面这个网址换成您的域名 -->
+    <meta property="og:image" content="https://cji-dept10.github.io/cover.jpg">
     
     <style>
-        /* --- 基础样式 --- */
+        /* --- 1. 基础样式与动画 --- */
         :root {
             --primary: #003366; 
             --secondary: #f68b1f; 
             --gold: #d4af37;
             --hot-red: #ff4d4f;
-            --bg: #f0f2f5; /* 稍微深一点的灰背景，突出白卡片 */
+            --bg: #f0f2f5;
             --text: #333;
             --card-bg: #fff;
         }
-        /* 修改后的样子 (增加了 animation 属性) */
+        /* 增加淡入动画，防止白屏 */
         body { 
-    font-family: 'Segoe UI', 'Helvetica Neue', 'Microsoft YaHei', sans-serif; 
-    background: var(--bg); 
-    margin: 0; 
-    color: var(--text); 
-    padding-bottom: 100px;
-    
-    /* 这里是核心：让网页加载时淡入 0.8秒 */
-    animation: fadeIn 0.8s ease-in-out; 
-}
-
-/* 定义淡入动画的原理 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); } /* 从透明且稍微靠下一点开始 */
-    to { opacity: 1; transform: translateY(0); }      /* 变成不透明且回到原位 */
-}
+            font-family: 'Segoe UI', 'Helvetica Neue', 'Microsoft YaHei', sans-serif; 
+            background: var(--bg); margin: 0; color: var(--text); padding-bottom: 100px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 1. 通知栏 (保持黄色醒目) */
+        /* --- 2. 顶部导航与通知 --- */
         .notice-bar { background-color: #fff8e1; color: #856404; text-align: center; padding: 6px 20px; font-size: 12px; border-bottom: 1px solid #ffeeba; display: flex; justify-content: center; align-items: center; gap: 10px; }
 
-        /* 2. 导航栏 (大改：深蓝背景，白色文字) */
-        header { 
-            background: var(--primary); 
-            color: white; 
-            position: sticky; top: 0; z-index: 1000; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-        }
+        header { background: var(--primary); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
         .nav-inner { max-width: 1400px; margin: 0 auto; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
         .brand { display: flex; align-items: center; gap: 12px; }
-        
-        /* Logo加了个白边或者滤镜，防止在深蓝底上看不清 */
         .brand-logo { height: 40px; width: auto; background: white; padding: 2px; border-radius: 4px; } 
         .brand-text h1 { font-size: 20px; margin: 0; color: white; font-weight: 700; letter-spacing: 0.5px; }
 
         .lang-control-area { display: flex; align-items: center; gap: 10px; }
+        .manual-lang-btn { border: 1px solid rgba(255,255,255,0.5); color: white; background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; white-space: nowrap; }
         
-        /* 语言按钮改成了透明白边风格 */
-        .manual-lang-btn { 
-            border: 1px solid rgba(255,255,255,0.5); 
-            color: white; 
-            background: rgba(255,255,255,0.1); 
-            padding: 4px 10px; border-radius: 4px; 
-            font-size: 12px; cursor: pointer; font-weight: bold; white-space: nowrap; 
-        }
-        .manual-lang-btn:hover { background: rgba(255,255,255,0.2); }
-        
-        /* 谷歌翻译 */
         #google_translate_element { min-width: 120px; display: block; }
         .goog-te-banner-frame { display: none !important; }
         body { top: 0px !important; } 
         .goog-tooltip { display: none !important; }
         .goog-te-gadget-simple { background-color: white !important; border: none !important; padding: 3px !important; border-radius: 4px !important; }
 
-        /* 3. 核心展示区 (更立体) */
+        /* --- 3. 核心展示区 (背景图) --- */
         .showcase-section {
-            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)), url('office.png');
-            background-size: cover;
-            background-position: center;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* 增加阴影层次 */
+            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)), url('office.jpg');
+            background-size: cover; background-position: center;
+            padding: 40px 20px; text-align: center; border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .slogan { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
         .cert-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .cert-img { height: 150px; width: auto; border: 1px solid #fff; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; cursor: pointer; background: white; }
         .cert-img:hover { transform: scale(1.05); }
 
-        /* 搜索与列表 */
+        /* --- 4. 搜索与筛选 --- */
         .toolbar { background: #e9ecef; padding: 15px 20px; text-align: center; }
         .search-container { max-width: 600px; margin: 0 auto; position: relative; }
         .search-input { width: 100%; padding: 12px 20px; padding-right: 50px; border-radius: 30px; border: 1px solid #ccc; outline: none; font-size: 15px; box-sizing: border-box; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
@@ -109,37 +77,38 @@
 
         .grid-info { max-width: 1400px; margin: 15px auto; padding: 0 15px; font-size: 12px; color: #888; display: flex; justify-content: space-between; }
         
-        /* 4. 产品网格 (电脑端保持不变) */
+        /* --- 5. 产品卡片与布局 --- */
         .product-grid { max-width: 1400px; margin: 0 auto; padding: 0 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 15px; }
 
-        /* 卡片设计 (增加阴影，更立体) */
         .card { background: var(--card-bg); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: 0.2s; border: none; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,51,102,0.15); }
-        
         .card.selected { border: 2px solid var(--secondary) !important; background: #fffbf5; }
         .card.selected::after { content: "✓"; position: absolute; top: 0; right: 0; background: var(--secondary); color: white; padding: 2px 8px; border-bottom-left-radius: 6px; font-size: 12px; font-weight: bold; z-index: 2; }
-
         .card.featured { border-top: 3px solid var(--gold) !important; }
+        
         .hot-ribbon { position: absolute; top: 0; right: 0; background: var(--hot-red); color: white; font-size: 10px; font-weight: bold; padding: 2px 6px; border-bottom-left-radius: 6px; z-index: 1; }
 
         .card-body { padding: 12px; flex-grow: 1; }
         .chem-icon-bg { position: absolute; bottom: 5px; right: 5px; opacity: 0.03; font-size: 50px; pointer-events: none; color: #000; }
-        
         .cas-tag { font-family: Consolas, monospace; font-size: 11px; color: #666; background: #f1f3f5; padding: 1px 5px; border-radius: 3px; display: inline-block; margin-bottom: 5px; }
         .prod-name { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; }
         .prod-cat { font-size: 10px; text-transform: uppercase; color: #999; letter-spacing: 0.5px; margin-bottom: 6px; }
         .prod-desc { font-size: 12px; color: #555; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 34px; }
 
+        /* 规格标签样式 */
         .specs-row { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
         .spec-badge { font-size: 10px; color: #444; background: #eef6fc; padding: 2px 6px; border-radius: 3px; border: 1px solid #daecf9; display: flex; align-items: center; gap: 3px; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-        .spec-badge b { color: var(--primary); }
-
-        .card-action { padding: 10px; border-top: 1px solid #f8f9fa; background: #fff; }
-        .btn-add { width: 100%; border: 1px solid #ddd; background: #fff; color: #666; padding: 6px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: 0.2s; font-weight: 600; }
+        
+        /* 按钮区域样式 (含复制按钮) */
+        .card-action { padding: 10px; border-top: 1px solid #f8f9fa; background: #fff; display: flex; gap: 8px; }
+        .btn-add { flex: 1; border: 1px solid #ddd; background: #fff; color: #666; padding: 6px; border-radius: 4px; cursor: pointer; font-size: 12px; transition: 0.2s; font-weight: 600; }
         .btn-add:hover { background: var(--primary); border-color: var(--primary); color: white; }
         .card.selected .btn-add { background: var(--secondary); border-color: var(--secondary); color: white; }
-    
-        /* 悬浮区 */
+        
+        .btn-copy { width: 30px; border: 1px solid #eee; background: #f8f9fa; color: #888; border-radius: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s; }
+        .btn-copy:hover { background: #e2e6ea; color: #333; }
+
+        /* --- 6. 悬浮按钮区 --- */
         .float-bar { position: fixed; bottom: 30px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 999; align-items: flex-end; }
         .social-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; background: white; }
         .btn-wa { background: #25D366; font-size: 22px; } 
@@ -161,28 +130,17 @@
         .footer-info a:hover { color: var(--secondary); border-bottom-color: var(--secondary); }
         .copyright { padding-top: 20px; border-top: 1px solid #333; color: #555; }
 
-        /* --- 5. 手机端大改版 (双列布局) --- */
+        /* --- 7. 手机适配 --- */
         @media (max-width: 768px) {
-            /* 强制变成 2 列 */
-            .product-grid { 
-                grid-template-columns: 1fr 1fr; /* 1:1 等分 */
-                gap: 10px; /* 间距缩小 */
-                padding: 0 10px;
-            }
-            
-            /* 手机端卡片内容压缩 */
+            .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px; }
             .card-body { padding: 10px; }
-            .prod-name { font-size: 13px; margin-bottom: 2px; height: 34px; overflow: hidden; } /* 限制标题高度 */
-            .prod-desc { display: none; } /* 手机端隐藏那一长串描述，只留标题和标签，太挤了不好看 */
+            .prod-name { font-size: 13px; margin-bottom: 2px; height: 34px; overflow: hidden; } 
+            .prod-desc { display: none; } 
             .cas-tag { font-size: 10px; padding: 1px 4px; margin-bottom: 4px; }
             .specs-row { gap: 3px; margin-top: 5px; }
             .spec-badge { font-size: 9px; padding: 2px 4px; }
-            
-            /* 手机端按钮调整 */
             .card-action { padding: 8px; }
             .btn-add { font-size: 11px; padding: 4px; }
-
-            /* 头部调整 */
             .nav-inner { flex-direction: column; gap: 10px; align-items: center; padding: 10px; }
             .brand { justify-content: center; }
             .lang-control-area { width: 100%; justify-content: center; }
@@ -206,7 +164,6 @@
                 <h1 id="lbl-company">CJI Chemical</h1>
             </div>
         </div>
-        
         <div class="lang-control-area">
             <button class="manual-lang-btn" onclick="toggleLocalLang()">🇨🇳 中文 / EN</button>
             <div id="google_translate_element"></div>
@@ -238,12 +195,17 @@
 
 <div class="product-grid" id="grid"></div>
 
+<!-- 悬浮按钮区 -->
 <div class="float-bar">
     <a href="#" class="social-btn btn-top" id="btnTop" title="Back to Top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">⬆</a>
+    
     <a href="https://wa.me/8615295570878" target="_blank" class="social-btn btn-wa" title="WhatsApp">💬</a>
-    <a href="#" class="social-btn btn-wechat" title="WeChat ID: darinsun820" onclick="alert('WeChat ID: darinsun820\nPlease add me manually.')">
+    
+    <!-- 👇 这里是微信 ID，我已经帮您改好了 -->
+    <a href="#" class="social-btn btn-wechat" title="WeChat: darinsun820" onclick="alert('WeChat ID: darinsun820\nPlease add me manually.')">
         <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M14,0 C6.268,0 0,5.168 0,11.541 C0,15.141 2.379,18.358 6.035,20.352 C6.268,20.48 6.375,20.762 6.273,21.016 L5.453,23.336 C5.344,23.645 5.66,23.938 5.941,23.777 L9.395,21.801 C9.57,21.703 9.777,21.676 9.973,21.727 C11.266,22.051 12.613,22.223 14,22.223 C21.73,22.223 28,17.055 28,10.684 C28,4.313 21.73,0 14,0 Z M9.5,9 C8.672,9 8,8.328 8,7.5 C8,6.672 8.672,6 9.5,6 C10.328,6 11,6.672 11,7.5 C11,8.328 10.328,9 9.5,9 Z M18.5,9 C17.672,9 17,8.328 17,7.5 C17,6.672 17.672,6 18.5,6 C19.328,6 20,6.672 20,7.5 C20,8.328 19.328,9 18.5,9 Z"/></svg>
     </a>
+    
     <div class="cart-bar" id="cartBar" onclick="sendInquiry()">
         <span id="cartText">🛒 Inquiry List</span>
         <span class="cart-count" id="cartCount">0</span>
@@ -255,15 +217,18 @@
         <div class="footer-info">
             <h3 id="lbl-contact">Contact Us</h3>
             <p><b>Tel:</b> +86-25-83273961 &nbsp;|&nbsp; <b>Mob:</b> +86-15295570878</p>
-            <p><b>Email:</b> <a href="mailto:darinsun820@gmail.com">darinsun820@gmail.com</a></p>
-             <!-- 👇 在这里加一行新的 👇 -->
-    <p><b>Email:</b> <a href="mailto:bensun@cjigroup.com.cn">bensun@cjigroup.com.cn</a></p>
+            
+            <!-- 👇 这里是邮箱，已经帮您加好了两个 -->
+            <p><b>Email 1:</b> <a href="mailto:bensun@cjigroup.com.cn">bensun@cjigroup.com.cn</a></p>
+            <p><b>Email 2:</b> <a href="mailto:darinsun820@gmail.com">darinsun820@gmail.com</a></p>
+            
             <p><b>Add:</b> 9F, No.199-1, Guoji Road, Qinhuai District, Nanjing, China</p>
         </div>
     </div>
     <div class="copyright">© 2026 China Jiangsu International Chemical Co., Ltd</div>
 </footer>
 
+<!-- 引入 JS 库 -->
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
@@ -271,12 +236,13 @@ function googleTranslateElementInit() {
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<!-- 引入配置和数据 -->
 <script src="data.js"></script>
 <script src="config.js"></script>
 
 <script>
     if (typeof productData === 'undefined' || typeof ui === 'undefined') {
-        alert("System Error: Data file loading failed. Please check data.js and config.js.");
+        alert("System Error: Data loading failed. Please check data.js and config.js.");
     }
 
     let db = productData;
@@ -333,6 +299,20 @@ function googleTranslateElementInit() {
         });
     }
 
+    // --- 新增：复制信息功能 (WhatsApp格式) ---
+    function copyCardInfo(id, btn) {
+        const item = db.find(p => p.id === id);
+        const pInfo = item[currentLang] || item.en;
+        const textToCopy = `*Product:* ${pInfo.name}\n*CAS:* ${item.cas}\n${pInfo.spec ? `*Spec:* ${pInfo.spec}\n` : ''}${pInfo.pack ? `*Pack:* ${pInfo.pack}\n` : ''}----------------\n*Usage:* ${pInfo.app}\n🔗 ${window.location.href}`;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = btn.innerText;
+            btn.innerText = "✅";
+            setTimeout(() => { btn.innerText = "📋"; }, 1500);
+        }).catch(err => alert("Please copy manually."));
+        event.stopPropagation();
+    }
+
     function render(data) {
         grid.innerHTML = "";
         countDisplay.innerText = `${data.length} Products`;
@@ -349,7 +329,7 @@ function googleTranslateElementInit() {
 
             const ribbonHTML = isFeatured ? `<div class="hot-ribbon">🔥 HOT</div>` : '';
 
-                card.innerHTML = `
+            card.innerHTML = `
                 ${ribbonHTML}
                 <div class="card-body">
                     <div class="chem-icon-bg">⚗️</div>
@@ -369,32 +349,10 @@ function googleTranslateElementInit() {
                         `}
                     </div>
                 </div>
-                
-                <!-- 修改了这里：增加了一个复制按钮 -->
                 <div class="card-action">
-                    <!-- 复制按钮 (📋) -->
+                    <!-- 复制按钮 -->
                     <button class="btn-copy" onclick="copyCardInfo(${item.id}, this)" title="Copy info">📋</button>
-                    
-                    <!-- 原来的加入按钮 (宽度会自动调整) -->
-                    <button class="btn-add" style="flex:1;">${isSelected ? t.addedBtn : t.addBtn}</button>
-                </div>
-            `;
-                    
-                    <!-- 核心修改：这里加了逻辑判断 -->
-                    <!-- 如果有规格(spec)或包装(pack)，显示蓝色标签 -->
-                    <!-- 如果没有，显示灰色的“咨询”标签，填补空白 -->
-                    <div class="specs-row">
-                        ${(pInfo.spec || pInfo.pack) ? `
-                            ${pInfo.spec ? `<div class="spec-badge">🧪 ${pInfo.spec}</div>` : ''}
-                            ${pInfo.pack ? `<div class="spec-badge">📦 ${pInfo.pack}</div>` : ''}
-                        ` : `
-                            <div class="spec-badge" style="background:#fff; border:1px dashed #ccc; color:#999; font-style:italic;">
-                                📩 Contact for COA / TDS
-                            </div>
-                        `}
-                    </div>
-                </div>
-                <div class="card-action">
+                    <!-- 加入按钮 -->
                     <button class="btn-add">${isSelected ? t.addedBtn : t.addBtn}</button>
                 </div>
             `;
@@ -443,6 +401,7 @@ function googleTranslateElementInit() {
         cartBar.classList.toggle('show', cart.size > 0);
     }
 
+    // --- 发送询盘逻辑 (已更新双邮箱) ---
     function sendInquiry() {
         if(cart.size === 0) return;
         const t = ui[currentLang];
@@ -454,7 +413,9 @@ function googleTranslateElementInit() {
             body += `${index + 1}. ${name} (CAS: ${p.cas})${info}\n`;
         });
         body += "\n--------------------------\n";
-        window.location.href = `bensun@cjigroup.com.cn?subject=${encodeURIComponent(t.inquirySubject)}&body=${encodeURIComponent(body)}`;
+        
+        // 👇 重点：这里已经改好了两个邮箱
+        window.location.href = `mailto:bensun@cjigroup.com.cn,darinsun820@gmail.com?subject=${encodeURIComponent(t.inquirySubject)}&body=${encodeURIComponent(body)}`;
     }
 
     window.filterData = function(key, btn) {
@@ -473,44 +434,11 @@ function googleTranslateElementInit() {
         }
     };
 
+    // 启动
     searchInput.addEventListener('input', applyFilters);
     updateUIText();
     renderFilterButtons();
     applyFilters();
-    // --- 新增：一键复制功能 ---
-    function copyCardInfo(id, btn) {
-        // 1. 找到该产品数据
-        const item = db.find(p => p.id === id);
-        const pInfo = item[currentLang] || item.en; // 优先复制当前语言版本
-        
-        // 2. 生成要复制的文本格式 (专门为 WhatsApp/微信 优化)
-        const textToCopy = `*Product:* ${pInfo.name}
-*CAS:* ${item.cas}
-${pInfo.spec ? `*Spec:* ${pInfo.spec}` : ''}
-${pInfo.pack ? `*Pack:* ${pInfo.pack}` : ''}
-----------------
-*Usage:* ${pInfo.app}
-🔗 Check more: ${window.location.href}`;
-
-        // 3. 执行复制
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            // 4. 成功的视觉反馈 (图标变对勾)
-            const originalText = btn.innerText;
-            btn.innerText = "✅";
-            btn.style.color = "green";
-            
-            // 1.5秒后变回去
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.color = "";
-            }, 1500);
-        }).catch(err => {
-            alert("Copy failed, please copy manually.");
-        });
-        
-        // 阻止冒泡 (防止触发卡片点击)
-        event.stopPropagation();
-    }
 </script>
 </body>
 </html>
