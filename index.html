@@ -333,7 +333,7 @@ function googleTranslateElementInit() {
 
             const ribbonHTML = isFeatured ? `<div class="hot-ribbon">🔥 HOT</div>` : '';
 
-            card.innerHTML = `
+                card.innerHTML = `
                 ${ribbonHTML}
                 <div class="card-body">
                     <div class="chem-icon-bg">⚗️</div>
@@ -342,12 +342,19 @@ function googleTranslateElementInit() {
                     <div class="prod-cat">${ui[currentLang].cats[item.cat] || item.cat}</div>
                     <div class="prod-desc">${pInfo.app}</div>
                     
-                    ${(pInfo.spec || pInfo.pack) ? `
-                        <div class="specs-row">
+                    <!-- 核心修改：这里加了逻辑判断 -->
+                    <!-- 如果有规格(spec)或包装(pack)，显示蓝色标签 -->
+                    <!-- 如果没有，显示灰色的“咨询”标签，填补空白 -->
+                    <div class="specs-row">
+                        ${(pInfo.spec || pInfo.pack) ? `
                             ${pInfo.spec ? `<div class="spec-badge">🧪 ${pInfo.spec}</div>` : ''}
                             ${pInfo.pack ? `<div class="spec-badge">📦 ${pInfo.pack}</div>` : ''}
-                        </div>
-                    ` : ''}
+                        ` : `
+                            <div class="spec-badge" style="background:#fff; border:1px dashed #ccc; color:#999; font-style:italic;">
+                                📩 Contact for COA / TDS
+                            </div>
+                        `}
+                    </div>
                 </div>
                 <div class="card-action">
                     <button class="btn-add">${isSelected ? t.addedBtn : t.addBtn}</button>
