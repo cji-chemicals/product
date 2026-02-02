@@ -4,7 +4,7 @@ const ui = {
     // === 英文版配置 ===
     en: {
         // 1. 顶部通知
-        notice: "📢 Notice: Our office will be closed for the Spring Festival holidays from Jan 28 to Feb 4.",
+        notice: " Notice: Our office will be closed for the Spring Festival holidays from Feb 15 to Feb 23.",
 
         // 2. 一句话价值主张 (替代了原来的长文案)
         slogan: "Your Trusted Partner for Fine Chemicals | AEO & ISO 37301 Certified",
