@@ -16,7 +16,44 @@
     <meta property="og:image" content="https://cji-dept10.github.io/cover.jpg">
     
     <style>
-        /* --- 1. 基础样式与动画 --- */
+        /* 1. 基础卡片样式优化 */
+.product-card {
+    background: #ffffff;
+    border-radius: 12px;           /* 圆角：更现代 */
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;    /* 增加平滑动画 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* 轻微阴影 */
+}
+
+/* 2. 悬浮效果：让卡片“浮起来” */
+.product-card:hover {
+    transform: translateY(-5px);  /* 向上微调 */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12); /* 增强阴影 */
+    border-color: #007bff;        /* 悬浮时边框变色 */
+}
+
+/* 3. 突出 CAS 号 */
+.cas-number {
+    display: inline-block;
+    background: #e7f3ff;          /* 浅蓝色背景 */
+    color: #0056b3;               /* 深蓝色文字 */
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; /* 更加专业的字体 */
+    font-size: 0.9em;
+}
+
+/* 4. 搜索高亮文字样式 */
+.highlight {
+    background-color: #ffeb3b;    /* 明亮的黄色高亮 */
+    padding: 0 2px;
+    border-radius: 2px;
+    color: #000;
+}
+        /* --- 5. 基础样式与动画 --- */
         :root {
             --primary: #003366; 
             --secondary: #f68b1f; 
@@ -34,7 +71,7 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* --- 2. 顶部导航与通知 --- */
+        /* --- 6. 顶部导航与通知 --- */
         .notice-bar { background-color: #fff8e1; color: #856404; text-align: center; padding: 6px 20px; font-size: 12px; border-bottom: 1px solid #ffeeba; display: flex; justify-content: center; align-items: center; gap: 10px; }
 
         header { background: var(--primary); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
@@ -52,9 +89,9 @@
         .goog-tooltip { display: none !important; }
         .goog-te-gadget-simple { background-color: white !important; border: none !important; padding: 3px !important; border-radius: 4px !important; }
 
-        /* --- 3. 核心展示区 (背景图) --- */
+        /* --- 7. 核心展示区 (背景图) --- */
         .showcase-section {
-            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)), url('office.jpg');
+            background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)), url('office.png');
             background-size: cover; background-position: center;
             padding: 40px 20px; text-align: center; border-bottom: 1px solid #ddd;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -64,7 +101,7 @@
         .cert-img { height: 150px; width: auto; border: 1px solid #fff; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: 0.3s; cursor: pointer; background: white; }
         .cert-img:hover { transform: scale(1.05); }
 
-        /* --- 4. 搜索与筛选 --- */
+        /* --- 8. 搜索与筛选 --- */
         .toolbar { background: #e9ecef; padding: 15px 20px; text-align: center; }
         .search-container { max-width: 600px; margin: 0 auto; position: relative; }
         .search-input { width: 100%; padding: 12px 20px; padding-right: 50px; border-radius: 30px; border: 1px solid #ccc; outline: none; font-size: 15px; box-sizing: border-box; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
@@ -77,7 +114,7 @@
 
         .grid-info { max-width: 1400px; margin: 15px auto; padding: 0 15px; font-size: 12px; color: #888; display: flex; justify-content: space-between; }
         
-        /* --- 5. 产品卡片与布局 --- */
+        /* --- 9. 产品卡片与布局 --- */
         .product-grid { max-width: 1400px; margin: 0 auto; padding: 0 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 15px; }
 
         .card { background: var(--card-bg); border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: 0.2s; border: none; display: flex; flex-direction: column; overflow: hidden; position: relative; }
@@ -439,6 +476,35 @@ function googleTranslateElementInit() {
     updateUIText();
     renderFilterButtons();
     applyFilters();
+    // 第一步：添加高亮辅助函数
+function highlightText(text, query) {
+    if (!query || query.trim() === "") return text;
+    // 使用正则进行不区分大小写的匹配
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.toString().replace(regex, '<span class="highlight">$1</span>');
+}
+
+// 第二步：修改你的渲染函数 (示例结构)
+function renderProducts(filteredProducts, searchQuery = "") {
+    const container = document.getElementById('product-list'); // 假设你的容器 ID
+    container.innerHTML = "";
+
+    filteredProducts.forEach(product => {
+        // 在显示前，对名称和 CAS 进行高亮处理
+        const highlightedName = highlightText(product.name, searchQuery);
+        const highlightedCAS = highlightText(product.cas, searchQuery);
+
+        // 构建 HTML
+        const cardHTML = `
+            <div class="product-card">
+                <h3>${highlightedName}</h3>
+                <p>CAS: <span class="cas-number">${highlightedCAS}</span></p>
+                <!-- 其他信息... -->
+            </div>
+        `;
+        container.innerHTML += cardHTML;
+    });
+}
 </script>
 </body>
 </html>
