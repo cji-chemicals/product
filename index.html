@@ -19,7 +19,7 @@
         * { box-sizing: border-box; }
         body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; margin: 0; background: #fff; color: #333; line-height: 1.5; }
 
-        /* --- 2. 导航栏：解决 Logo 协调性与下拉功能 --- */
+        /* --- 2. 导航栏 --- */
         header { 
             position: fixed; top: 0; width: 100%; z-index: 3000; height: 75px;
             background: #ffffff; border-bottom: 2px solid var(--primary);
@@ -36,7 +36,6 @@
         .nav-item > a { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 14px; padding: 0 15px; cursor: pointer; height: 100%; display: flex; align-items: center; }
         .nav-item:hover > a, .nav-item > a.active { color: var(--secondary); background: #f8f9fa; }
 
-        /* 下拉菜单菜单 */
         .dropdown {
             position: absolute; top: 75px; left: 0; background: white; border: 1px solid var(--border);
             min-width: 220px; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -45,7 +44,7 @@
         .dropdown a { color: #444; padding: 12px 20px; text-decoration: none; display: block; font-size: 13px; border-bottom: 1px solid #f0f0f0; }
         .dropdown a:hover { background: #f8f9fa; color: var(--secondary); padding-left: 25px; }
 
-        /* --- 3. 板块逻辑：强制隐藏/显示 --- */
+        /* --- 3. 板块逻辑 --- */
         .page-section { display: none; min-height: 100vh; padding-top: 75px; }
         .page-section.active { display: block; animation: pageFade 0.4s ease; }
         @keyframes pageFade { from { opacity: 0; } to { opacity: 1; } }
@@ -58,7 +57,7 @@
         .hero h2 { font-size: 60px; margin: 0; font-weight: 900; }
         .hero p { font-size: 22px; margin: 20px 0 40px; font-weight: 300; opacity: 0.9; }
 
-        /* --- 5. PRODUCTS 页面：复原最初最帅的目录 --- */
+        /* --- 5. PRODUCTS 页面：复原最初精致目录 --- */
         .filter-strip { background: #eef2f6; padding: 30px 0; border-bottom: 1px solid var(--border); }
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .search-box { width: 100%; max-width: 700px; margin: 0 auto; display: flex; }
@@ -81,7 +80,7 @@
         .tag-row { display: flex; gap: 8px; margin-top: auto; border-top: 1px solid #f0f0f0; padding-top: 12px; }
         .tag-badge { font-size: 11px; padding: 4px 8px; background: #fff; border: 1px solid #d1d9e0; border-radius: 4px; font-weight: bold; display: flex; align-items: center; gap: 4px; }
 
-        /* --- 6. STRENGTH 页面：模块化填充，拒绝空旷 --- */
+        /* --- 6. STRENGTH 页面 --- */
         .strength-block { padding: 80px 0; }
         .s-row { display: flex; gap: 60px; align-items: center; }
         .s-text { flex: 1.2; }
@@ -101,7 +100,22 @@
         .news-img { width: 450px; background-size: cover; background-position: center; flex-shrink: 0; }
         .news-body { padding: 40px; }
 
-        /* --- 8. 翻译与页脚 --- */
+        /* --- 8. 悬浮联系按钮样式 (新增) --- */
+        .float-contact { 
+            position: fixed; bottom: 30px; right: 25px; 
+            display: flex; flex-direction: column; gap: 15px; z-index: 4000; 
+        }
+        .btn-contact { 
+            width: 60px; height: 60px; border-radius: 50%; 
+            display: flex; justify-content: center; align-items: center; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); cursor: pointer; 
+            transition: 0.3s; text-decoration: none; border: none;
+        }
+        .btn-whatsapp { background: #25D366; }
+        .btn-wechat { background: #fff; border: 1px solid #e0e0e0; }
+        .btn-contact:hover { transform: scale(1.1); }
+
+        /* --- 9. 翻译与页脚 --- */
         #google_translate_element { margin-left: 15px; border-left: 1px solid #eee; padding-left: 15px; }
         footer { background: #0a0e12; color: #999; padding: 80px 0; }
         .footer-inner { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; }
@@ -112,7 +126,6 @@
             .s-row, .news-item, .footer-inner { flex-direction: column; grid-template-columns: 1fr; }
             .news-img { width: 100%; height: 250px; }
             .cert-grid { grid-template-columns: 1fr 1fr; }
-            .hero h2 { font-size: 36px; }
         }
     </style>
 </head>
@@ -132,9 +145,9 @@
                 <div class="dropdown">
                     <a href="javascript:void(0)" onclick="filterByNav('Pharma')">Pharma Intermediates</a>
                     <a href="javascript:void(0)" onclick="filterByNav('Solvents')">Solvents</a>
-                    <a onclick="filterByNav('Agro')">Agrochemicals</a>
-                    <a onclick="filterByNav('Fragrance')">Fragrance & Flavors</a>
-                    <a onclick="filterByNav('Additives')">Additives</a>
+                    <a href="javascript:void(0)" onclick="filterByNav('Agro')">Agrochemicals</a>
+                    <a href="javascript:void(0)" onclick="filterByNav('Fragrance')">Fragrance & Flavors</a>
+                    <a href="javascript:void(0)" onclick="filterByNav('Additives')">Additives</a>
                 </div>
             </div>
 
@@ -237,6 +250,18 @@
     </div>
 </div>
 
+<!-- 悬浮联系按钮区 (新增) -->
+<div class="float-contact">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/8615295570878" target="_blank" class="btn-contact btn-whatsapp" title="WhatsApp">
+        <svg fill="#fff" width="35" height="35" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.764-5.766zm3.376 8.232c-.128.366-.633.639-1.038.726-.273.051-.614.062-1.034-.075-.215-.07-.47-.182-1.254-.515-1.297-.552-2.112-1.888-2.178-1.977-.067-.088-.54-.718-.54-1.381 0-.662.348-.988.473-1.12.125-.133.271-.166.363-.166.091 0 .181 0 .258.006.083.003.171-.03.264.179.094.208.331.812.359.871.028.059.046.128.007.203-.039.075-.059.123-.119.191-.059.068-.124.152-.177.204-.059.059-.119.123-.051.24.068.117.301.496.649.807.448.4 0.824.524.944.577.119.053.189.045.258-.034.069-.079.301-.351.381-.471.079-.119.158-.099.264-.059.106.039.673.318.789.376.115.059.192.088.22.135.027.046.027.27-.101.636zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.523 0-10-4.477-10-10S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    </a>
+    <!-- 微信 -->
+    <div class="btn-contact btn-wechat" onclick="alert('WeChat ID: darinsun820')" title="WeChat">
+        <svg width="35" height="35" viewBox="0 0 28 28"><path fill="#07c160" d="M14,0 C6.268,0 0,5.168 0,11.541 C0,15.141 2.379,18.358 6.035,20.352 C6.268,20.48 6.375,20.762 6.273,21.016 L5.453,23.336 C5.344,23.645 5.66,23.938 5.941,23.777 L9.395,21.801 C9.57,21.703 9.777,21.676 9.973,21.727 C11.266,22.051 12.613,22.223 14,22.223 C21.73,22.223 28,17.055 28,10.684 C28,4.313 21.73,0 14,0 Z M9.5,9 C8.672,9 8,8.328 8,7.5 C8,6.672 8.672,6 9.5,6 C10.328,6 11,6.672 11,7.5 C11,8.328 10.328,9 9.5,9 Z M18.5,9 C17.672,9 17,8.328 17,7.5 C17,6.672 17.672,6 18.5,6 C19.328,6 20,6.672 20,7.5 C20,8.328 19.328,9 18.5,9 Z"/></svg>
+    </div>
+</div>
+
 <footer>
     <div class="container">
         <div class="footer-inner">
@@ -248,14 +273,13 @@
             <div>
                 <p><b>TEL:</b> +86-25-83273961</p>
                 <p><b>MOB:</b> +86-15295570878</p>
-                <p><b>EMAIL:</b> <a href="mailto:bensun@cjigroup.com.cn">bensun@cjigroup.com.cn</a></p>
+                <p><b>EMAIL:</b> <a href="mailto:bensun@cjigroup.com.cn" style="color:#fff;">bensun@cjigroup.com.cn</a></p>
                 <p><b>ADD:</b> 9F, No.199-1, Guoji Road, Nanjing, China</p>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- 1. 谷歌翻译 -->
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -270,44 +294,32 @@ function googleTranslateElementInit() {
     let currentFilter = 'All';
     const featuredIDs = [1, 7, 175, 9, 10, 2, 8, 106, 65];
 
-    // --- 彻底修复跳转的核心函数 ---
     function showSection(id) {
-        // 强制隐藏所有板块
         document.querySelectorAll('.page-section').forEach(s => {
             s.style.display = 'none';
             s.classList.remove('active');
         });
-        
-        // 强制取消所有高亮
         document.querySelectorAll('.nav-item a').forEach(l => l.classList.remove('active'));
 
-        // 显示目标板块
         const target = document.getElementById('sec-' + id);
         if(target) {
             target.style.display = 'block';
             setTimeout(() => target.classList.add('active'), 10);
-            
-            // 高亮对应导航
             const navLink = document.getElementById('link-' + id);
             if(navLink) navLink.classList.add('active');
         }
-        
-        // 滚回顶部
         window.scrollTo(0,0);
     }
 
     function filterByNav(cat) {
         currentFilter = cat;
-        showSection('products'); // 切到产品页
+        showSection('products');
         applyFilters();
     }
 
-    // --- 极致复原目录逻辑 ---
     function render(data) {
         const grid = document.getElementById('grid');
         grid.innerHTML = "";
-        
-        // 强力排序：HOT 置顶
         const sorted = [...data].sort((a,b) => {
             const isA = featuredIDs.includes(a.id);
             const isB = featuredIDs.includes(b.id);
@@ -321,7 +333,6 @@ function googleTranslateElementInit() {
             const pInfo = item.en;
             const card = document.createElement('div');
             card.className = 'card';
-            
             card.innerHTML = `
                 ${isHot ? '<div class="hot-ribbon">🔥 HOT</div>' : ''}
                 <div class="prod-cat">${item.cat || "Chemical"}</div>
@@ -330,7 +341,7 @@ function googleTranslateElementInit() {
                 <p class="prod-desc">${pInfo.app}</p>
                 <div class="tag-row">
                     ${pInfo.spec ? `<div class="tag-badge">🧪 ${pInfo.spec}</div>` : ''}
-                    ${pInfo.pack ? `<div class="tag-badge">📦 ${pInfo.pack}</div>` : ''}
+                    ${pInfo.pack ? `<div class="badge tag-badge">📦 ${pInfo.pack}</div>` : ''}
                 </div>
             `;
             grid.appendChild(card);
@@ -347,7 +358,6 @@ function googleTranslateElementInit() {
         render(filtered);
     }
 
-    // 初始化加载
     applyFilters();
 </script>
 </body>
