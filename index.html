@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CJI Chemical | Global Supply Chain Leader</title>
     <link rel="icon" href="logo2.png" type="image/png">
     
@@ -21,7 +21,7 @@
         }
 
         * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg-gray); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg-gray); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
         /* --- 2. 导航栏 (悬浮与高级质感) --- */
         header { 
@@ -62,39 +62,15 @@
         .page-section.active { display: block; animation: pageFade 0.6s ease-out forwards; }
         @keyframes pageFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 4. 手机端全适配 --- */
-        @media (max-width: 992px) {
-            .menu-toggle { display: block; }
-            .logo-area h1 { font-size: 18px; } 
-            nav { 
-                display: none; position: absolute; top: 80px; left: 0; width: 100%; 
-                background: white; flex-direction: column; height: auto; padding: 10px 0;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-top: 1px solid var(--border);
-            }
-            nav.mobile-open { display: flex; }
-            .nav-item { width: 100%; height: auto; }
-            .nav-item > a { width: 100%; padding: 15px 30px; border-bottom: 1px solid var(--border); }
-            .nav-item > a::after { display: none; }
-            .dropdown { position: static; box-shadow: none; border: none; display: block; width: 100%; padding: 0; opacity: 1; visibility: visible; transform: none; background: var(--bg-gray); }
-            /* 手机端精简网格 */
-            .product-grid { grid-template-columns: 1fr 1fr !important; gap: 15px !important; padding: 20px 15px !important; }
-            .card { padding: 15px !important; }
-            .prod-name { font-size: 14px !important; height: 40px !important; }
-            .prod-desc { display: none; }
-            .s-row, .contact-wrap { flex-direction: column !important; }
-            .news-item { flex-direction: column; }
-            .news-img { width: 100% !important; height: 250px; }
-        }
-
-        /* --- 5. HOME 首屏 (大厂风范) --- */
+        /* --- 4. HOME 首屏 (大厂风范) --- */
         .hero { 
             height: calc(100vh - 80px); min-height: 600px;
             background: linear-gradient(to right, rgba(0, 59, 115, 0.9), rgba(0, 59, 115, 0.4)), url('building.png') center/cover no-repeat;
             display: flex; flex-direction: column; justify-content: center; align-items: flex-start; 
             color: white; padding: 0 10%;
         }
-        .hero h2 { font-size: clamp(40px, 5vw, 70px); margin: 0; font-weight: 800; line-height: 1.1; max-width: 800px; }
-        .hero p { font-size: clamp(18px, 2vw, 24px); margin: 30px 0 50px; font-weight: 300; opacity: 0.9; border-left: 3px solid var(--secondary); padding-left: 20px; }
+        .hero h2 { font-size: clamp(32px, 5vw, 70px); margin: 0; font-weight: 800; line-height: 1.1; max-width: 800px; }
+        .hero p { font-size: clamp(16px, 2vw, 24px); margin: 30px 0 50px; font-weight: 300; opacity: 0.9; border-left: 3px solid var(--secondary); padding-left: 20px; }
         .hero button {
             background: var(--secondary); color: white; border: none; padding: 18px 50px; border-radius: 4px; 
             font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 168, 89, 0.3);
@@ -102,95 +78,151 @@
         }
         .hero button:hover { background: #008f4c; transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 168, 89, 0.4); }
 
-        /* --- 6. PRODUCTS 产品中心 (企业级数据展示) --- */
+        /* --- 5. PRODUCTS 产品中心 --- */
         .filter-strip { background: white; padding: 40px 0; border-bottom: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .search-box { width: 100%; max-width: 800px; margin: 0 auto; position: relative; }
         .search-box input { 
-            width: 100%; padding: 18px 30px; border-radius: 50px; border: 2px solid var(--border); 
-            outline: none; font-size: 16px; background: var(--bg-gray); transition: all 0.3s;
+            width: 100%; padding: 18px 30px 18px 50px; border-radius: 50px; border: 2px solid var(--border); 
+            outline: none; font-size: 16px; background-color: var(--bg-gray); transition: all 0.3s;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2211%22 cy=%2211%22 r=%228%22></circle><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22></line></svg>'); 
+            background-repeat: no-repeat; background-position: 20px center;
         }
-        .search-box input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(0,59,115,0.1); }
+        .search-box input:focus { border-color: var(--primary); background-color: white; box-shadow: 0 0 0 4px rgba(0,59,115,0.1); }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; padding: 60px 0; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding: 60px 0; }
         .card { 
             background: white; border: 1px solid var(--border); border-radius: 12px; padding: 30px; 
             position: relative; display: flex; flex-direction: column; overflow: hidden;
         }
-        .card:hover { transform: translateY(-8px); border-color: transparent; box-shadow: 0 20px 40px rgba(0,59,115,0.08); }
-        
+        .card:hover { transform: translateY(-5px); border-color: transparent; box-shadow: 0 20px 40px rgba(0,59,115,0.08); }
         .hot-ribbon { position: absolute; top: 15px; right: -30px; background: var(--hot); color: white; padding: 5px 40px; font-size: 12px; font-weight: 800; transform: rotate(45deg); z-index: 5; letter-spacing: 1px; }
-        
-        /* 针对你 JS 渲染的类别标签的补充样式 */
         .prod-cat { font-size: 12px; color: var(--secondary); font-weight: 800; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }
-        
-        .cas-tag { font-family: 'Inter', monospace; font-size: 13px; color: var(--primary); background: rgba(0,59,115,0.05); padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-weight: 600; border: 1px solid rgba(0,59,115,0.1); }
-        .prod-name { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 10px; height: 55px; display: flex; align-items: flex-start; line-height: 1.3; }
-        .prod-desc { font-size: 14px; color: var(--text-light); height: 45px; overflow: hidden; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-        .tag-row { display: flex; gap: 10px; margin-top: auto; border-top: 1px solid var(--border); padding-top: 15px; }
-        .tag-badge { font-size: 12px; padding: 5px 10px; background: var(--bg-gray); color: var(--text-main); border-radius: 4px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .cas-tag { font-family: 'Inter', monospace; font-size: 13px; color: var(--primary); background: rgba(0,59,115,0.05); padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 12px; font-weight: 600; border: 1px solid rgba(0,59,115,0.1); }
+        .prod-name { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px; line-height: 1.3; }
+        .prod-desc { font-size: 13px; color: var(--text-light); margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; border-top: 1px solid var(--border); padding-top: 15px; }
+        .tag-badge { font-size: 12px; padding: 5px 10px; background: var(--bg-gray); color: var(--text-main); border-radius: 4px; font-weight: 600; display: flex; align-items: center; gap: 5px; border: 1px solid var(--border); }
 
-        /* --- 7. STRENGTH 实力展示 (图文并茂，高级排版) --- */
+        /* --- 6. STRENGTH & NEWS & CONTACT --- */
         .strength-block { padding: 100px 0; background: white; }
         .s-row { display: flex; gap: 80px; align-items: center; }
         .s-text { flex: 1; }
-        .s-text h2 { color: var(--primary); font-size: 42px; margin-bottom: 30px; font-weight: 800; position: relative; padding-bottom: 20px; }
+        .s-text h2 { color: var(--primary); font-size: 40px; margin-bottom: 30px; font-weight: 800; position: relative; padding-bottom: 20px; line-height: 1.2; }
         .s-text h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 4px; background: var(--secondary); }
         .s-text p { font-size: 18px; color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
         .s-text b { color: var(--primary); font-weight: 800; }
-        .s-img { flex: 1; }
-        .s-img img { width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .s-img { flex: 1; width: 100%; }
+        .s-img img { width: 100%; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); object-fit: cover; }
         
         .cert-wall { background: var(--bg-gray); padding: 100px 0; }
         .cert-wall h2 { text-align: center; color: var(--primary); font-size: 36px; font-weight: 800; margin-bottom: 60px; }
-        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-        .cert-item { background: white; padding: 30px 20px; border-radius: 12px; text-align: center; transition: all 0.3s; border: 1px solid var(--border); }
-        .cert-item:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); border-color: var(--secondary); }
-        .cert-item img { width: 80%; margin-bottom: 15px; }
-        .cert-item p { font-weight: 600; color: var(--primary); margin: 0; }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; }
+        .cert-item { background: white; padding: 25px 15px; border-radius: 12px; text-align: center; border: 1px solid var(--border); }
+        .cert-item img { width: 70%; margin-bottom: 15px; }
+        .cert-item p { font-weight: 600; color: var(--primary); margin: 0; font-size: 14px; }
 
-        /* --- 8. NEWS 新闻中心 (高级卡片) --- */
         .news-item { display: flex; background: white; margin-bottom: 50px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .news-img-wrap { width: 400px; overflow: hidden; flex-shrink: 0; }
+        .news-img { width: 100%; height: 100%; min-height: 250px; background-size: cover; background-position: center; transition: transform 0.6s ease; }
         .news-item:hover .news-img { transform: scale(1.05); }
-        .news-img-wrap { width: 450px; overflow: hidden; flex-shrink: 0; }
-        .news-img { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.6s ease; }
-        .news-body { padding: 50px; display: flex; flex-direction: column; justify-content: center; }
-        .news-body h3 { font-size: 28px; color: var(--primary); margin-top: 0; margin-bottom: 20px; font-weight: 800; }
-        .news-body p { font-size: 16px; color: var(--text-light); line-height: 1.8; margin: 0; }
+        .news-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .news-body h3 { font-size: 24px; color: var(--primary); margin-top: 0; margin-bottom: 15px; font-weight: 800; }
+        .news-body p { font-size: 15px; color: var(--text-light); line-height: 1.8; margin: 0; }
 
-        /* --- 9. CONTACT US 联系我们 (企业工作台视角) --- */
         #sec-contact { background: white; }
-        .contact-wrap { max-width: 1300px; margin: 0 auto; padding: 80px 20px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
+        .contact-wrap { max-width: 1300px; margin: 0 auto; padding: 80px 20px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
         .contact-info-panel { background: var(--primary); color: #fff; padding: 50px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,59,115,0.2); }
-        .contact-info-panel h2 { color: white; margin-top: 0; margin-bottom: 40px; font-size: 32px; font-weight: 800; }
-        .contact-info-panel p { font-size: 16px; margin: 25px 0; line-height: 1.6; display: flex; align-items: flex-start; }
-        .contact-info-panel b { color: var(--secondary); min-width: 80px; display: inline-block; font-weight: 800; }
+        .contact-info-panel h2 { color: white; margin-top: 0; margin-bottom: 30px; font-size: 30px; font-weight: 800; }
+        .contact-info-panel p { font-size: 15px; margin: 20px 0; line-height: 1.6; }
+        .contact-info-panel b { color: var(--secondary); min-width: 70px; display: inline-block; font-weight: 800; }
         
-        .inquiry-form { margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; }
-        .inquiry-form input, .inquiry-form textarea { 
-            width: 100%; padding: 15px 20px; margin-bottom: 20px; border-radius: 8px; border: none; 
-            background: rgba(255,255,255,0.1); color: white; font-family: 'Inter', sans-serif;
-        }
+        .inquiry-form { margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+        .inquiry-form input, .inquiry-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; font-family: 'Inter', sans-serif; font-size: 15px; }
         .inquiry-form input::placeholder, .inquiry-form textarea::placeholder { color: rgba(255,255,255,0.6); }
         .inquiry-form input:focus, .inquiry-form textarea:focus { outline: 2px solid var(--secondary); background: rgba(255,255,255,0.2); }
-        .inquiry-form button { width: 100%; background: var(--secondary); color: #fff; border: none; padding: 18px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 16px; }
-        .inquiry-form button:hover { background: #008f4c; transform: translateY(-2px); }
-
-        .map-section h2 { color: var(--primary); margin-top: 0; font-size: 32px; font-weight: 800; }
-        .map-frame { border-radius: 16px; overflow: hidden; height: 550px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border); margin-top: 30px; }
-
-        /* --- 10. 悬浮与页脚 --- */
-        .float-contact { position: fixed; bottom: 40px; right: 40px; display: flex; flex-direction: column; gap: 20px; z-index: 5000; }
-        .btn-contact { width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 15px 30px rgba(0,0,0,0.15); cursor: pointer; }
-        .btn-contact:hover { transform: scale(1.1); }
-        .btn-wa { background: #25D366; }
-        .btn-wc { background: #fff; border: 1px solid var(--border); }
+        .inquiry-form button { width: 100%; background: var(--secondary); color: #fff; border: none; padding: 16px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 16px; }
         
-        #google_translate_element { margin-left: 20px; padding-left: 20px; position: relative; }
-        #google_translate_element::before { content: ''; position: absolute; left: 0; top: 20%; height: 60%; width: 1px; background: var(--border); }
+        .map-section h2 { color: var(--primary); margin-top: 0; font-size: 30px; font-weight: 800; }
+        .map-frame { border-radius: 16px; overflow: hidden; height: 450px; border: 1px solid var(--border); margin-top: 20px; }
+
+        .float-contact { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 5000; }
+        .btn-contact { width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); cursor: pointer; background: white; border: 1px solid var(--border); }
+        .btn-wa { background: #25D366; border: none; }
         
-        footer { background: #0f172a; color: #94a3b8; padding: 60px 0; text-align: center; font-size: 14px; }
-        footer h3 { color: white; font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; }
+        #google_translate_element { margin-left: 20px; padding-left: 20px; border-left: 1px solid var(--border); }
+        footer { background: #0f172a; color: #94a3b8; padding: 50px 20px; text-align: center; font-size: 14px; }
+        footer h3 { color: white; font-size: 20px; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; }
+
+        /* =========================================================
+           7. 手机端极限优化 (MOBILE OPTIMIZATION - THE CORE FIX)
+           ========================================================= */
+        @media (max-width: 992px) {
+            /* 导航栏变更为紧凑样式 */
+            header { height: 70px; padding: 0; }
+            .nav-inner { padding: 0 15px; }
+            .logo-area h1 { font-size: 18px; padding-left: 10px; }
+            .logo-area img { height: 35px; }
+            .menu-toggle { display: block; font-size: 26px; }
+            
+            nav { 
+                display: none; position: absolute; top: 70px; left: 0; width: 100%; 
+                background: white; flex-direction: column; height: auto; padding: 0;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15); border-top: 1px solid var(--border);
+            }
+            nav.mobile-open { display: flex; }
+            .nav-item { width: 100%; height: auto; }
+            .nav-item > a { width: 100%; padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 16px; justify-content: space-between; }
+            .nav-item > a::after { display: none; }
+            
+            /* 手机端下拉菜单展开 */
+            .dropdown { position: static; box-shadow: none; border: none; display: block; width: 100%; padding: 0; opacity: 1; visibility: visible; transform: none; background: var(--bg-gray); border-bottom: 1px solid var(--border); }
+            .dropdown a { padding: 12px 20px 12px 40px; font-size: 14px; border-bottom: 1px solid #eef2f6; }
+
+            #google_translate_element { margin: 15px 20px; padding: 0; border: none; }
+
+            /* 各个 Section 顶部留出导航栏的距离 */
+            .page-section { padding-top: 70px; }
+
+            /* 首屏大幅度缩减高度和字体 */
+            .hero { min-height: 450px; padding: 0 20px; height: auto; padding-top: 100px; padding-bottom: 60px; }
+            .hero h2 { font-size: 32px; line-height: 1.2; }
+            .hero p { font-size: 16px; margin: 20px 0 30px; padding-left: 15px; }
+            .hero button { padding: 14px 30px; font-size: 16px; width: 100%; justify-content: center; }
+
+            /* 全局板块留白瘦身 (100px -> 40px) */
+            .strength-block, .cert-wall, .filter-strip, .product-grid, #sec-news .container, .contact-wrap { 
+                padding: 40px 20px !important; 
+            }
+            
+            /* 产品中心：手机端强制改为【单列布局】，给长单词充分空间 */
+            .product-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+            .card { padding: 20px !important; }
+            .prod-name { font-size: 17px !important; }
+            
+            /* 搜索框适配 */
+            .search-box input { padding: 15px 20px 15px 45px; font-size: 15px; }
+
+            /* 图文排版由左右变为上下 */
+            .s-row, .contact-wrap, .news-item { flex-direction: column !important; gap: 30px !important; }
+            
+            /* 字体全面缩小 */
+            .s-text h2, .cert-wall h2, .map-section h2, #sec-news h2 { font-size: 26px !important; margin-bottom: 20px !important; }
+            .s-text p { font-size: 15px; text-align: left; }
+            
+            /* 新闻和联系卡片内边距瘦身 */
+            .news-img-wrap { width: 100% !important; }
+            .news-body { padding: 25px !important; }
+            .news-body h3 { font-size: 20px !important; }
+            .contact-info-panel { padding: 30px 20px !important; }
+            .contact-info-panel h2 { font-size: 24px !important; margin-bottom: 20px !important; }
+            .map-frame { height: 300px !important; }
+
+            /* 悬浮按钮调小一点以免遮挡内容 */
+            .float-contact { bottom: 20px; right: 20px; gap: 10px; }
+            .btn-contact { width: 45px; height: 45px; }
+            .btn-contact svg { width: 24px; height: 24px; }
+        }
     </style>
 </head>
 <body>
@@ -198,8 +230,7 @@
 <header>
     <div class="nav-inner">
         <a href="javascript:void(0)" class="logo-area" onclick="showSection('home')">
-            <!-- 假设你的 logo.png 存在 -->
-            <img src="logo.png" alt="CJI Logo">
+            <img src="logo.png" alt="CJI Logo" onerror="this.style.display='none'">
             <h1>CJI CHEMICAL</h1>
         </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -241,12 +272,12 @@
     <div class="filter-strip">
         <div class="container">
             <div class="search-box">
-                <!-- 添加了搜索图标的 SVG 背景以提升高级感，纯CSS实现 -->
-                <input type="text" id="searchInput" placeholder="Search CAS or Product Name..." oninput="applyFilters()" style="padding-left: 50px; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><circle cx=%2211%22 cy=%2211%22 r=%228%22></circle><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22></line></svg>'); background-repeat: no-repeat; background-position: 20px center;">
+                <input type="text" id="searchInput" placeholder="Search CAS or Product Name..." oninput="applyFilters()">
             </div>
         </div>
     </div>
     <div class="container bg-white" style="border-radius: 16px; margin-top: -20px; position: relative; z-index: 10; padding-top: 20px;">
+        <!-- 手机端现在是优雅的单列布局了！ -->
         <div class="product-grid" id="grid"></div>
     </div>
 </div>
@@ -261,7 +292,7 @@
                     <p>Established in 1984, CJI Chemical is a key subsidiary of the state-owned CJI Group. We have been a reliable pillar in the global fine chemical market for 40 years.</p>
                     <p>We are <b>AEO Advanced Certified</b>, ensuring maximum compliance, faster customs clearance, and unparalleled efficiency for our global partners.</p>
                 </div>
-                <div class="s-img"><img src="building.png" alt="CJI Building"></div>
+                <div class="s-img"><img src="building.png" alt="CJI Building" onerror="this.style.display='none'"></div>
             </div>
         </div>
     </div>
@@ -273,7 +304,7 @@
                     <p>Strategically partnered with industry leaders including <b>MAERSK, COSCO, MSC, and CMA CGM</b>.</p>
                     <p>We specialize in hazardous chemical logistics and comprehensive multimodal transport solutions, ensuring your materials arrive safely and on time.</p>
                 </div>
-                <div class="s-img"><img src="shipping.png" alt="Logistics" style="border: 1px solid var(--border);"></div>
+                <div class="s-img"><img src="shipping.png" alt="Logistics" style="border: 1px solid var(--border);" onerror="this.style.display='none'"></div>
             </div>
         </div>
     </div>
@@ -281,14 +312,14 @@
         <div class="container">
             <h2>Global Qualifications</h2>
             <div class="cert-grid">
-                <div class="cert-item"><img src="cert1.png" alt="AEO"><p>AEO Certificate</p></div>
-                <div class="cert-item"><img src="cert2.png" alt="ISO 37301"><p>ISO 37301 Compliance</p></div>
-                <div class="cert-item"><img src="cert3.png" alt="HazChem"><p>HazChem Registration</p></div>
-                <div class="cert-item"><img src="cert4.png" alt="HazChem License"><p>HazChem License</p></div>
-                <div class="cert-item"><img src="cert5.png" alt="ISO 9001"><p>ISO 9001 System</p></div>
-                <div class="cert-item"><img src="cert6.png" alt="ISO 14001"><p>ISO 14001 System</p></div>
-                <div class="cert-item"><img src="cert7.png" alt="ISO 45001"><p>ISO 45001 System</p></div>
-                <div class="cert-item"><img src="cert8.png" alt="ISO 27001"><p>ISO 27001 System</p></div>
+                <div class="cert-item"><img src="cert1.png" onerror="this.style.display='none'"><p>AEO Certificate</p></div>
+                <div class="cert-item"><img src="cert2.png" onerror="this.style.display='none'"><p>ISO 37301</p></div>
+                <div class="cert-item"><img src="cert3.png" onerror="this.style.display='none'"><p>HazChem Reg</p></div>
+                <div class="cert-item"><img src="cert4.png" onerror="this.style.display='none'"><p>HazChem License</p></div>
+                <div class="cert-item"><img src="cert5.png" onerror="this.style.display='none'"><p>ISO 9001</p></div>
+                <div class="cert-item"><img src="cert6.png" onerror="this.style.display='none'"><p>ISO 14001</p></div>
+                <div class="cert-item"><img src="cert7.png" onerror="this.style.display='none'"><p>ISO 45001</p></div>
+                <div class="cert-item"><img src="cert8.png" onerror="this.style.display='none'"><p>ISO 27001</p></div>
             </div>
         </div>
     </div>
@@ -296,8 +327,8 @@
 
 <!-- PAGE: NEWS -->
 <div id="sec-news" class="page-section" style="background: var(--bg-gray);">
-    <div class="container" style="padding:80px 0;">
-        <h2 style="text-align:center; color:var(--primary); font-size:36px; font-weight:800; margin-bottom:60px;">Corporate Highlights</h2>
+    <div class="container">
+        <h2 style="text-align:center; color:var(--primary); font-size:36px; font-weight:800; margin-bottom:50px;">Corporate Highlights</h2>
         
         <div class="news-item">
             <div class="news-img-wrap"><div class="news-img" style="background-image:url('show1.png');"></div></div>
@@ -328,15 +359,15 @@
             <p><b>ADD:</b> 9F, No.199-1, Guoji Road, Nanjing, China</p>
             
             <div class="inquiry-form">
-                <h3 style="color:var(--secondary); margin-top:0; margin-bottom: 20px; font-size: 22px;">Direct Inquiry</h3>
+                <h3 style="color:var(--secondary); margin-top:0; margin-bottom: 20px; font-size: 20px;">Direct Inquiry</h3>
                 <input type="text" id="c_name" placeholder="Your Name or Company">
-                <textarea id="c_msg" rows="4" placeholder="How can we help you? (Product inquiry, SDS request, etc.)"></textarea>
+                <textarea id="c_msg" rows="4" placeholder="How can we help you?"></textarea>
                 <button onclick="sendMail()">Send Email Request</button>
             </div>
         </div>
         <div class="map-section">
             <h2>Global Headquarters</h2>
-            <p style="color:var(--text-light); font-size: 18px;">9F, No.199-1, Guoji Road, Nanjing, China (中江国际大厦)</p>
+            <p style="color:var(--text-light); font-size: 15px;">9F, No.199-1, Guoji Road, Nanjing, China</p>
             <div class="map-frame">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.82!2d118.7885!3d32.0469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34bf7cd4613589a1%3A0x6a6d68378609559c!2z5Lit5Zu95rGf6IuP55yB5Y2X5Lqs5biC56em5reu5Yy65Zu96ZmF6LevMTk5LTE!5e0!3m2!1sen!2s!4v1706850000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
@@ -344,27 +375,26 @@
     </div>
 </div>
 
-<!-- 悬浮按钮保持不变 -->
+<!-- 悬浮按钮 -->
 <div class="float-contact">
-    <a href="https://wa.me/8615295570878" target="_blank" class="btn-contact btn-wa"><svg fill="#fff" width="35" height="35" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.764-5.766zm3.376 8.232c-.128.366-.633.639-1.038.726-.273.051-.614.062-1.034-.075-.215-.07-.47-.182-1.254-.515-1.297-.552-2.112-1.888-2.178-1.977-.067-.088-.54-.718-.54-1.381 0-.662.348-.988.473-1.12.125-.133.271-.166.363-.166.091 0 .181 0 .258.006.083.003.171-.03.264.179.094.208.331.812.359.871.028.059.046.128.007.203-.039.075-.059.123-.119.191-.059.068-.124.152-.177.204-.059.059-.119.123-.051.24.068.117.301.496.649.807.448.4 0.824.524.944.577.119.053.189.045.258-.034.069-.079.301-.351.381-.471.079-.119.158-.099.264-.059.106.039.673.318.789.376.115.059.192.088.22.135.027.046.027.27-.101.636zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.523 0-10-4.477-10-10S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
-    <div class="btn-contact btn-wc" onclick="alert('WeChat ID: darinsun820')"><svg width="40" height="40" viewBox="0 0 28 28"><path fill="#07c160" d="M14,0 C6.268,0 0,5.168 0,11.541 C0,15.141 2.379,18.358 6.035,20.352 C6.268,20.48 6.375,20.762 6.273,21.016 L5.453,23.336 C5.344,23.645 5.66,23.938 5.941,23.777 L9.395,21.801 C9.57,21.703 9.777,21.676 9.973,21.727 C11.266,22.051 12.613,22.223 14,22.223 C21.73,22.223 28,17.055 28,10.684 C28,4.313 21.73,0 14,0 Z M9.5,9 C8.672,9 8,8.328 8,7.5 C8,6.672 8.672,6 9.5,6 C10.328,6 11,6.672 11,7.5 C11,8.328 10.328,9 9.5,9 Z M18.5,9 C17.672,9 17,8.328 17,7.5 C17,6.672 17.672,6 18.5,6 C19.328,6 20,6.672 20,7.5 C20,8.328 19.328,9 18.5,9 Z"/></svg></div>
+    <a href="https://wa.me/8615295570878" target="_blank" class="btn-contact btn-wa"><svg fill="#fff" width="28" height="28" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.766-5.764-5.766zm3.376 8.232c-.128.366-.633.639-1.038.726-.273.051-.614.062-1.034-.075-.215-.07-.47-.182-1.254-.515-1.297-.552-2.112-1.888-2.178-1.977-.067-.088-.54-.718-.54-1.381 0-.662.348-.988.473-1.12.125-.133.271-.166.363-.166.091 0 .181 0 .258.006.083.003.171-.03.264.179.094.208.331.812.359.871.028.059.046.128.007.203-.039.075-.059.123-.119.191-.059.068-.124.152-.177.204-.059.059-.119.123-.051.24.068.117.301.496.649.807.448.4 0.824.524.944.577.119.053.189.045.258-.034.069-.079.301-.351.381-.471.079-.119.158-.099.264-.059.106.039.673.318.789.376.115.059.192.088.22.135.027.046.027.27-.101.636zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22c-5.523 0-10-4.477-10-10S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+    <div class="btn-contact btn-wc" onclick="alert('WeChat ID: darinsun820')"><svg width="30" height="30" viewBox="0 0 28 28"><path fill="#07c160" d="M14,0 C6.268,0 0,5.168 0,11.541 C0,15.141 2.379,18.358 6.035,20.352 C6.268,20.48 6.375,20.762 6.273,21.016 L5.453,23.336 C5.344,23.645 5.66,23.938 5.941,23.777 L9.395,21.801 C9.57,21.703 9.777,21.676 9.973,21.727 C11.266,22.051 12.613,22.223 14,22.223 C21.73,22.223 28,17.055 28,10.684 C28,4.313 21.73,0 14,0 Z M9.5,9 C8.672,9 8,8.328 8,7.5 C8,6.672 8.672,6 9.5,6 C10.328,6 11,6.672 11,7.5 C11,8.328 10.328,9 9.5,9 Z M18.5,9 C17.672,9 17,8.328 17,7.5 C17,6.672 17.672,6 18.5,6 C19.328,6 20,6.672 20,7.5 C20,8.328 19.328,9 18.5,9 Z"/></svg></div>
 </div>
 
 <footer>
     <div class="container">
         <h3>CJI CHEMICAL</h3>
-        <p>© 2026 China Jiangsu International Chemical Co., Ltd. | Global Supply Chain Leader</p>
+        <p>© 2026 China Jiangsu International Chemical Co., Ltd. <br> Global Supply Chain Leader</p>
     </div>
 </footer>
 
-<!-- JS保持完全不变 -->
 <script type="text/javascript">function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'en',layout:google.translate.TranslateElement.InlineLayout.SIMPLE},'google_translate_element');}</script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="data.js"></script><script src="config.js"></script>
 <script>
     let db = typeof productData !== 'undefined' ? productData : [];
     let currentFilter = 'All';
-    const featuredIDs = [1, 7, 175, 9, 10, 2, 8, 106, 65];
+    const featuredIDs =[1, 7, 175, 9, 10, 2, 8, 106, 65];
 
     function toggleMenu() { document.getElementById('mainNav').classList.toggle('mobile-open'); }
 
@@ -391,7 +421,7 @@
                 <div class="prod-cat">${item.cat || "Fine Chemical"}</div>
                 <div class="cas-tag">CAS: ${item.cas}</div>
                 <div class="prod-name">${pInfo.name}</div>
-                <p class="prod-desc" title="${pInfo.app}">${pInfo.app}</p>
+                <div class="prod-desc" title="${pInfo.app}">${pInfo.app}</div>
                 <div class="tag-row">${pInfo.spec ? `<div class="tag-badge">🧪 ${pInfo.spec}</div>` : ''}${pInfo.pack ? `<div class="tag-badge">📦 ${pInfo.pack}</div>` : ''}</div>
             `;
             grid.appendChild(card);
