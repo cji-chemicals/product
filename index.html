@@ -7,7 +7,7 @@
     <link rel="icon" href="logo2.png" type="image/png">
     
     <style>
-        /* --- 1. 万华级大厂视觉规范 (Wanhua/BASF Style) --- */
+        /* --- 1. 万华级大厂视觉规范 --- */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         :root {
@@ -15,16 +15,17 @@
             --secondary: #00a859; 
             --hot: #ef4444;       
             --accent-yellow: #eab308; /* 卡片顶部黄边 */
-            --bg-gray: #f8fafc;   
+            --bg-gray: #f4f7f9;   /* 页面浅灰底色，突出白卡片 */
             --border: #e2e8f0;    
             --text-main: #1e293b; 
-            --text-light: #94a3b8;
+            --text-light: #64748b;
         }
 
+        /* 修复页面横向溢出的核心：box-sizing 和 overflow-x */
         * { box-sizing: border-box; transition: all 0.2s ease; }
-        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg-gray); color: var(--text-main); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg-gray); color: var(--text-main); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; width: 100%; }
 
-        /* --- 2. 导航栏 (保持高级质感) --- */
+        /* --- 2. 导航栏 --- */
         header { 
             position: fixed; top: 0; width: 100%; z-index: 4000; height: 70px;
             background: rgba(255, 255, 255, 0.98); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -53,9 +54,9 @@
         .page-section.active { display: block; animation: pageFade 0.4s ease-out forwards; }
         @keyframes pageFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 3. PRODUCTS 紧凑型电商卡片 (核心改造) --- */
+        /* --- 3. PRODUCTS 紧凑型电商卡片 --- */
         .filter-strip { background: white; padding: 20px 0; border-bottom: 1px solid var(--border); }
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 15px; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 15px; width: 100%; }
         .search-box { width: 100%; max-width: 600px; margin: 0 auto; position: relative; }
         .search-box input { 
             width: 100%; padding: 12px 20px 12px 40px; border-radius: 8px; border: 1px solid var(--border); 
@@ -63,33 +64,38 @@
             background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22></circle><line x1=%2221%22 y1=%2221%22 x2=%2216.65%22 y2=%2216.65%22></line></svg>'); 
             background-repeat: no-repeat; background-position: 15px center;
         }
-        .search-box input:focus { border-color: var(--primary); background-color: white; }
 
-        /* 电脑端默认网格：一行4个或5个 */
+        /* 电脑端默认网格：一行多个 */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; padding: 30px 0; }
         
-        /* 完全复刻截图的卡片样式 */
+        /* 完美复刻截图的卡片样式 */
         .card { 
-            background: white; border: 1px solid var(--border); border-radius: 10px; padding: 15px; 
+            background: white; border: 1px solid var(--border); border-radius: 8px; padding: 12px; 
             position: relative; display: flex; flex-direction: column; 
             border-top: 4px solid var(--accent-yellow); /* 顶部黄边 */
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            min-width: 0; /* 核心防撑爆代码1 */
         }
         .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
         
         .hot-ribbon { 
             position: absolute; top: 0; right: 0; background: var(--hot); color: white; 
-            padding: 3px 8px; font-size: 11px; font-weight: 800; border-radius: 0 6px 0 8px; z-index: 5; 
+            padding: 2px 6px; font-size: 10px; font-weight: 800; border-radius: 0 4px 0 8px; z-index: 5; 
         }
         
         .cas-text { font-size: 12px; color: var(--text-light); margin-bottom: 4px; font-family: monospace; }
-        .prod-name { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; min-height: 40px; }
-        .prod-cat { font-size: 11px; color: #cbd5e1; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+        .prod-name { 
+            font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; min-height: 40px; 
+            word-break: break-word; /* 核心防撑爆代码2：超长化学名强制换行 */
+            hyphens: auto;
+        }
+        .prod-cat { font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
         
-        .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        /* 标签改为纵向排列，完美适应小卡片 */
+        .tag-row { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 15px; }
         .tag-badge { font-size: 11px; padding: 3px 6px; border-radius: 4px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
-        .tag-spec { background: #e0f2fe; color: #0369a1; } /* 浅蓝底 深蓝字 */
-        .tag-pack { background: #fef3c7; color: #92400e; } /* 浅黄底 深褐字 */
+        .tag-spec { background: #e0f2fe; color: #0284c7; } /* 浅蓝底 深蓝字 */
+        .tag-pack { background: #fef3c7; color: #b45309; } /* 浅黄底 深褐字 */
 
         .add-btn {
             margin-top: auto; width: 100%; padding: 8px; background: white; border: 1px solid var(--border); 
@@ -97,28 +103,28 @@
         }
         .add-btn:hover { background: var(--bg-gray); border-color: #cbd5e1; }
 
-        /* --- 4. 其它板块 (精简保留) --- */
+        /* --- 4. 其它辅助板块 --- */
         .hero { height: 60vh; min-height: 400px; background: linear-gradient(to right, rgba(0, 59, 115, 0.9), rgba(0, 59, 115, 0.4)), url('building.png') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px; }
         .hero h2 { font-size: clamp(28px, 4vw, 50px); margin: 0; font-weight: 800; }
         .hero button { background: var(--secondary); color: white; border: none; padding: 14px 40px; border-radius: 6px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 30px; }
 
         .strength-block { padding: 60px 0; background: white; }
         .s-row { display: flex; gap: 40px; align-items: center; }
-        .s-text { flex: 1; }
-        .s-img { flex: 1; }
+        .s-text { flex: 1; min-width: 0; }
+        .s-img { flex: 1; width: 100%; }
         .s-img img { width: 100%; border-radius: 8px; }
 
-        .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; }
+        .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 0; width: 100%; }
         .contact-info-panel { background: var(--primary); color: white; padding: 40px; border-radius: 12px; }
         
         .float-contact { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 5000; }
         .btn-contact { width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; background: white; border: 1px solid var(--border); }
         .btn-wa { background: #25D366; border: none; }
         
-        footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; text-align: center; font-size: 13px; }
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; text-align: center; font-size: 13px; width: 100%; }
 
         /* =========================================================
-           5. 手机端极限优化 (完全匹配截图：一行两个，方块小一点)
+           5. 手机端极限防撑爆优化 (MOBILE OPTIMIZATION)
            ========================================================= */
         @media (max-width: 768px) {
             header { height: 60px; }
@@ -133,26 +139,27 @@
 
             .page-section { padding-top: 60px; }
             
-            /* --- 手机端网格：强制一行两个，间距极小 --- */
+            /* --- 手机端网格：强制一行两个，加入 minmax(0, 1fr) 防止溢出 --- */
             .product-grid { 
-                grid-template-columns: repeat(2, 1fr) !important; /* 一行两个 */
-                gap: 12px !important; /* 间距调小 */
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
+                gap: 10px !important; 
                 padding: 15px 10px !important; 
-                background: #f1f5f9; /* 截图背景略微发灰，衬托白色卡片 */
             }
             
             /* 手机端卡片内部瘦身 */
-            .card { padding: 10px !important; border-radius: 8px; border-top-width: 3px; }
-            .hot-ribbon { font-size: 9px; padding: 2px 6px; border-radius: 0 6px 0 6px; }
+            .card { padding: 10px !important; }
             .cas-text { font-size: 11px; margin-bottom: 2px; }
-            .prod-name { font-size: 14px; min-height: 38px; line-height: 1.2; margin-bottom: 2px; }
-            .prod-cat { font-size: 10px; margin-bottom: 8px; }
+            .prod-name { font-size: 13px !important; min-height: 36px; margin-bottom: 2px; } /* 字号略缩小以适应双列 */
+            .prod-cat { font-size: 9px; margin-bottom: 8px; }
+            
+            /* 属性标签保持竖排堆叠，文字缩小 */
             .tag-row { gap: 4px; margin-bottom: 10px; }
-            .tag-badge { font-size: 10px; padding: 2px 5px; }
+            .tag-badge { font-size: 10px; padding: 2px 5px; word-break: break-all; max-width: 100%; }
             .add-btn { padding: 6px; font-size: 12px; }
 
-            .s-row, .contact-wrap { flex-direction: column; gap: 20px; }
-            .contact-info-panel { padding: 20px; }
+            /* 修复其他可能撑爆宽度的板块 */
+            .s-row, .contact-wrap { flex-direction: column; gap: 20px; grid-template-columns: 1fr; }
+            .contact-info-panel { padding: 20px; width: 100%; }
         }
     </style>
 </head>
@@ -190,7 +197,7 @@
     </div>
 </div>
 
-<!-- PAGE: PRODUCTS (核心重构区) -->
+<!-- PAGE: PRODUCTS (产品列表区) -->
 <div id="sec-products" class="page-section">
     <div class="filter-strip">
         <div class="container">
@@ -199,9 +206,10 @@
             </div>
         </div>
     </div>
-    <!-- 这里的容器背景微调为浅灰，让白色小卡片更立体 -->
-    <div style="background: var(--bg-gray);">
+    <!-- 浅灰底色突出卡片边缘 -->
+    <div style="background: var(--bg-gray); padding-bottom: 40px;">
         <div class="container">
+            <!-- 产品网格 -->
             <div class="product-grid" id="grid"></div>
         </div>
     </div>
@@ -248,15 +256,8 @@
 
 <script src="data.js"></script>
 <script>
-    // 假设的数据结构，如果外链的 data.js 加载失败，提供测试数据以便你立刻看到效果
-    let db = typeof productData !== 'undefined' ? productData :[
-        { id: 1, cas: '77-73-6', cat: 'ADDITIVES', en: { name: 'Dicyclopentadiene (DCPD)', spec: 'Purity ≥ 97% / 99%', pack: '22 MT / ISO Tank' } },
-        { id: 2, cas: '98-86-2', cat: 'PHARMA', en: { name: 'Acetophenone', spec: 'Purity ≥ 99%', pack: '24 MT / ISO Tank' } },
-        { id: 3, cas: '288-47-1', cat: 'AGROCHEMICALS', en: { name: '1,3,4-Thiadiazole', spec: 'Purity ≥ 99%', pack: '25 kg / Bag' } },
-        { id: 4, cas: '122-20-3', cat: 'ADDITIVES', en: { name: 'Triisopropanolamine (TIPA)', spec: 'Purity ≥ 85%', pack: '23 MT / Flexitank' } }
-    ];
+    let db = typeof productData !== 'undefined' ? productData :[];
     let currentFilter = 'All';
-    const featuredIDs =[1, 2, 3, 4, 7, 175, 9];
 
     function toggleMenu() { document.getElementById('mainNav').classList.toggle('mobile-open'); }
 
@@ -273,19 +274,27 @@
 
     function render(data) {
         const grid = document.getElementById('grid'); grid.innerHTML = "";
-        const sorted = [...data].sort((a,b) => featuredIDs.includes(b.id) - featuredIDs.includes(a.id));
+        
+        // 我们依然把带有 spec 或 pack 的产品排在前面，因为它们内容更丰富
+        const sorted =[...data].sort((a,b) => {
+            const aHasContent = (a.en.spec || a.en.pack) ? 1 : 0;
+            const bHasContent = (b.en.spec || b.en.pack) ? 1 : 0;
+            return bHasContent - aHasContent;
+        });
         
         sorted.forEach(item => {
-            const isHot = featuredIDs.includes(item.id);
             const pInfo = item.en;
+            
+            // 核心修复：只有具备“成分(spec)”或“包装(pack)”信息的，才是 HOT
+            const isHot = (pInfo.spec || pInfo.pack);
+            
             const card = document.createElement('div'); 
             card.className = 'card';
             
-            // 完美复刻截图的 HTML 结构
             card.innerHTML = `
                 ${isHot ? '<div class="hot-ribbon">🔥 HOT</div>' : ''}
                 <div class="cas-text">${item.cas || 'N/A'}</div>
-                <div class="prod-name">${pInfo.name}</div>
+                <div class="prod-name" title="${pInfo.name}">${pInfo.name}</div>
                 <div class="prod-cat">${item.cat || "CHEMICALS"}</div>
                 <div class="tag-row">
                     ${pInfo.spec ? `<span class="tag-badge tag-spec">🧪 ${pInfo.spec}</span>` : ''}
