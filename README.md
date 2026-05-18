@@ -4,7 +4,7 @@ Built by a Chemical Trader with AI ：)
 
 <p align="center">
   <!-- 这是一个能自动打字更新的动态图片，网上很多人觉得神奇就是因为这个 -->
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=1000&color=F7118B&center=true&vCenter=true&width=435&lines=我是+GitHub+的新手;正在学习+Markdown+排版;立志要做一个超酷的个人主页" alt="Typing SVG" />
+ <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" width="400" />
 </p>
 
 ---
